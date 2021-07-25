@@ -5,7 +5,7 @@
 <script src="../assets/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
 <script src="../assets/assets/vendor/jquery.cookie/jquery.cookie.js"> </script>
 <script src="../assets/assets/vendor/jquery-validation/jquery.validate.min.js"></script>
-<script src="../assets/assets/js/front.js"></script>
+<script src="../assets/assets/js/main.js"></script>
 
 
 
@@ -14,7 +14,7 @@
 <script>
     $(function() {
         $(document).ready(function () {
-            $('#ticket_table').DataTable();
+            $('#_table').DataTable();
         });
 
     });

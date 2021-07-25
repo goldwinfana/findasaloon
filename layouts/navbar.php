@@ -28,7 +28,8 @@
         if($_SESSION['user'] == 'customer'){
             echo '
             <li class="active"><a href="./../customer/dashboard.php"> <i class="fa fa-home"></i>Home </a></li>
-            <li><a id="'.$_SESSION['id'].'" class="update-user-profile edit-student"> <i class="fa fa-user-circle"></i>Profile</a></li>
+            <li><a href="./bookings.php"> <i class="fa fa-first-order"></i>Bookings</a></li>
+            <li><a id="'.$_SESSION['id'].'" class="update-user-profile edit-profile"> <i class="fa fa-user-circle"></i>Profile</a></li>
             <li><a href="./maps.php" class="maps"> <i class="fa fa-map"></i>Maps</a></li>
             <li ><a class="upload-image"> <i class="fa fa-search-plus"></i>Upload</a></li>
        ';}
@@ -38,6 +39,9 @@
             <li class="active"><a href="./../saloon/dashboard.php"> <i class="fa fa-home"></i>Home </a></li>
             <li><a id="'.$_SESSION['id'].'" class="update-user-profile edit-profile"> <i class="fa fa-user-circle"></i>Profile</a></li>
             <li hidden><a class="create-shout book-session"> <i class="fa fa-plus-circle"></i>Book Session</a></li>
+            <li ><a href="stuff.php"> <i class="fa fa-users"></i>Stuff</a></li>
+            <li ><a class="upload-image"> <i class="fa fa-search-plus"></i>Uploads</a></li>
+            
        ';}
         ?>
         <li><a href="../logout.php"><i class="fa fa-sign-out"></i> Logout</a></li>

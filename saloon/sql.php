@@ -3,42 +3,40 @@ include './../layouts/session.php';
 $init = $pdo->open();
 $return = $_SERVER['HTTP_REFERER'];
 
-if(isset($_POST['user'])) {
-    $name = $_POST['add-name'];
-    $email = $_POST['add-email'];
-    $idNo = $_POST['add-idNo'];
-    $gender = $_POST['add-gender'];
-    $password = $_POST['password'];
-    $studentNo=date('Y').substr($idNo,2,4).substr(rand(),0,2);
-    if($_POST['user'] =='Admin'){
-        $sql = $init->prepare("SELECT * FROM admin WHERE email=:email ");
-        $sql->execute(['email' => $email]);
+if(isset($_POST['add-staff'])) {
+    $name = $_POST['staff-name'];
+    $email = $_POST['staff-email'];
+    $saloonID = $_SESSION['id'];
 
-        if ($sql->rowCount() > 0) {
-            $_SESSION['error'] = 'Email already exits';
-        } else {
+    $sql = $init->prepare("SELECT * FROM staff WHERE staffEmail=:email ");
+    $sql->execute(['email' => $email]);
 
-            $sql = $init->prepare("INSERT INTO admin(name, email,id_number,gender, password) 
-						VALUES (:name,:email,:id_number,:gender, :password)");
-            $sql->execute(['name'=>$name, 'email'=>$email,'id_number'=>$idNo,'gender'=>$gender, 'password'=>$password]);
-            $_SESSION['success'] = 'Admin added successfully';
+    if ($sql->rowCount() > 0) {
+        $_SESSION['error'] = 'Email already exits';
+    } else {
+
+        $sql = $init->prepare("INSERT INTO staff(stuffName, staffEmail,staffImage,saloonID) 
+                    VALUES (:name,:email,:img,:saloonID)");
+        $sql->execute(['saloonID'=>$saloonID,'name'=>$name, 'email'=>$email,'img'=>basename( $_FILES['stuff-img']['name'])]);
+
+        if(!empty($_FILES['stuff-img']))
+        {
+            $path = "uploads/";
+            $path = $path . basename( $_FILES['staff-img']['name']);
+
+            if(move_uploaded_file($_FILES['staff-img']['tmp_name'], $path)) {
+                echo "The file ".  basename( $_FILES['staff-img']['name']).
+                    " has been uploaded";
+            } else{
+                echo "There was an error uploading the file, please try again!";
+            }
         }
-        header('Location: '.$return);
-    }else{
-        $sql = $init->prepare("SELECT * FROM student WHERE email=:email ");
-        $sql->execute(['email' => $email]);
 
-        if ($sql->rowCount() > 0) {
-            $_SESSION['error'] = 'Email already exits';
-        } else {
 
-            $sql = $init->prepare("INSERT INTO student(studentNo,name, email,id_number,gender, password) 
-						VALUES (:studentNo,:name,:email,:id_number,:gender, :password)");
-            $sql->execute(['studentNo'=>$studentNo,'name'=>$name, 'email'=>$email,'id_number'=>$idNo,'gender'=>$gender, 'password'=>$password]);
-            $_SESSION['success'] = 'Student added successfully';
-        }
-        header('Location: '.$return);
+        $_SESSION['success'] = 'Staff added successfully';
     }
+    header('Location: '.$return);
+
 }
 
 if(isset($_POST['add-service'])) {
@@ -46,14 +44,14 @@ if(isset($_POST['add-service'])) {
     $service = $_POST['service'];
     $price = $_POST['price'];
 
-    $sql = $init->prepare("SELECT * FROM service WHERE name=:name ");
+    $sql = $init->prepare("SELECT * FROM service WHERE serviceName=:name ");
     $sql->execute(['name' => $service]);
 
     if ($sql->rowCount() > 0) {
         $_SESSION['error'] = 'Service already exits';
     } else {
 
-        $sql = $init->prepare("INSERT INTO service(categoryID,name,price) VALUES (:categoryID,:name,:price)");
+        $sql = $init->prepare("INSERT INTO service(categoryID,serviceName,price) VALUES (:categoryID,:name,:price)");
         $sql->execute(['categoryID'=>$category,'name'=>$service,'price'=>$price]);
         $_SESSION['success'] = 'Service added successfully';
     }

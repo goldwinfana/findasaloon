@@ -1,4 +1,4 @@
-<div class="modal fade" id="view-student-profile">
+<div class="modal fade" id="view-profile">
     <div class="modal-dialog">
         <div class="modal-content">
             <a type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-close"></i></a>
@@ -12,18 +12,15 @@
 
                 <hr/>
                 <div style="display: grid;float: left;">
-                    <label class=" col-form-label">Student Number: <span class="student-number"></span></label>
-                    <label class=" col-form-label">Name: <span class="student-name"></span></label>
-                    <label class=" col-form-label">E-Mail Address: <span class="student-email"></span></label>
-                    <label class=" col-form-label">ID Number: <span class="student-idNo"></span></label>
-                    <label class=" col-form-label">Age: <span class="student-age"></span></label>
-                    <label class=" col-form-label">Gender: <span class="student-gender"></span></label>
-
+                    <label class=" col-form-label">Name: <?php echo $_SESSION['name'] ?></label>
+                    <label class=" col-form-label">E-Mail Address: <?php echo $_SESSION['email'] ?></label>
+                    <label class=" col-form-label">Mobile Number: <?php echo $_SESSION['mobile'] ?></label>
                 </div>
 
             </div>
         </div>
     </div>
+</div>
 </div></div>
 
 <div class="modal fade" id="edit-profile">
@@ -35,62 +32,68 @@
             </div>
             <div class="modal-body">
 
-                <form class="form-horizontal" method="POST" action="sql.php" enctype="multipart/form-data"  onsubmit="return sendForm('editStudent')">
-                    <input class="form-control" type="text" name="edit-student" hidden>
+                <form class="form-horizontal customer-form" method="POST" action="sql.php" enctype="multipart/form-data"  onsubmit="return customerForm()">
+                    <input class="form-control" type="text" name="edit-customer" value="<?php echo ($_SESSION['id']);  ?>"  hidden>
 
                     <div class="form-group row">
-                        <label for="edit-name" class="col-md-4 col-form-label text-md-right">Name</label>
+                        <label for="name" class="col-md-4 col-form-label text-md-right">Name</label>
 
                         <div class="col-md-6">
-                            <input id="edit-name" type="text" class="form-control is-invalid" name="edit-name" required autocomplete="false">
+                            <input id="name" type="text" class="form-control is-invalid" value="<?php echo ($_SESSION['name']);  ?>" name="name" required autocomplete="false">
                         </div>
-                        <span class="text-center" role="alert" style="display: block">
-                            </span>
                     </div>
 
                     <div class="form-group row">
                         <label for="edit-email" class="col-md-4 col-form-label text-md-right">E-Mail Address</label>
 
                         <div class="col-md-6">
-                            <input id="edit-email" type="email" class="form-control is-invalid" name="edit-email" maxlength="30" onkeyup="validateEmail('editStudent')"  required autocomplete="">
+                            <input id="email" type="email" class="form-control is-invalid" value="<?php echo ($_SESSION['email']);  ?>" name="email" maxlength="30" onkeyup="validateEmail('editStudent')"  required autocomplete="">
                         </div>
-                        <span class="invalid-feedback text-center" role="alert" style="display: block">
-                                <strong id="edit-verifyEmail"></strong>
+                        <span class="valid-feedback text-center" role="alert" style="display: block">
+                                <strong id="verifyEmail"></strong>
                             </span>
                     </div>
 
 
                     <div class="form-group row">
-                        <label for="edit-idNo" class="col-md-4 col-form-label text-md-right">ID Number</label>
+                        <label for="edit-idNo" class="col-md-4 col-form-label text-md-right">Mobile</label>
 
                         <div class="col-md-6">
-                            <input id="edit-idNo" type="text" class="form-control is-invalid" name="edit-idNo" minlength="13" maxlength="13" onkeypress="return /[0-9]/i.test(event.key)" onkeyup="validateID('editStudent')" required autocomplete="off">
+                            <input id="mobile" type="text" class="form-control is-invalid" value="<?php echo ($_SESSION['mobile']);  ?>" name="mobile" minlength="10" maxlength="13" onkeypress="return /[0-9]/i.test(event.key)" onkeyup="customerMobile()" required autocomplete="off">
                         </div>
-                        <span class="invalid-feedback text-center" role="alert" style="display: block">
-                                <strong id="edit-verifyID"></strong>
+                        <span class="valid-feedback text-center" role="alert" style="display: block">
+                                <strong id="verifyMobile"></strong>
                             </span>
                     </div>
-
-
-                    <input id="edit-gender" type="text" class="form-control is-invalid" name="edit-gender" hidden>
-
 
 
                     <div class="form-group row">
                         <label for="edit-password" class="col-md-4 col-form-label text-md-right">Password&nbsp;</label>
 
                         <div  class="col-md-6">
-                            <input id="edit-password" type="text" class="form-control" name="edit-password" placeholder="e.g 1234*Abcd" minlength="8" onkeyup="createPassword('editStudent')" required autocomplete="off">
+                            <input id="password" type="text" class="form-control" value="<?php echo ($_SESSION['password']);  ?>" name="password" placeholder="e.g 1234*Abcd" minlength="8" onkeyup="createPassword('editStudent')" required autocomplete="off">
                         </div>
 
-                        <span class="invalid-feedback text-center" role="alert" style="display: block">
-                                <strong id="edit-verifyPass"></strong>
+                        <span class="valid-feedback text-center" role="alert" style="display: block">
+                                <strong id="custPassword"></strong>
+                            </span>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="password" class="col-md-4 col-form-label text-md-right">Confirm&nbsp;</label>
+
+                        <div  class="col-md-6">
+                            <input id="confirm" type="text" class="form-control"  name="passMatch" minlength="8" onkeyup="customerMatch()" required autocomplete="off">
+                        </div>
+
+                        <span class="valid-feedback text-center" role="alert" style="display: block">
+                                <strong id="custMatch"></strong>
                             </span>
                     </div>
 
 
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success btn-flat"><i class="fa fa-save"></i> Save</button>
+                        <button type="submit" class="btn btn-success btn-flat"><i class="fa fa-save"></i> Update</button>
                 </form>
             </div>
         </div>
@@ -167,6 +170,7 @@
         </div>
     </div>
 </div>
+</div>
 </div></div>
 
 
@@ -175,7 +179,7 @@
         <div class="modal-content">
             <a type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-close"></i></a>
             <div class="modal-header">
-                <span>Book Session</span>
+                <span>Search by Image</span>
             </div>
             <div class="modal-body">
 
@@ -187,7 +191,7 @@
                     </div>
                     <div>
                         <label>Upload Picture Of hair-Style You Wish To Search For...</label>
-                        <input class="form-control" type="image" name="img" required>
+                        <input class="form-control" type="file" name="photo" required>
                     </div>
 
                     <div class="modal-footer">
@@ -197,7 +201,7 @@
             </div>
         </div>
     </div></div>
-
+</div></div>
 
 <div class="modal fade" id="book-session">
     <div class="modal-dialog">
@@ -227,9 +231,9 @@
                         <input class="form-control" type="datetime-local" name="date-time" onchange="changeStuff()" required>
                     </div>
 
-                    <div>
+                    <div hidden>
                         <label>Pick Stuff</label>
-                        <select id="stuff" class="form-control" name="stuff" onchange="$('.stuff').text('Stuff Name: '+$('#stuff option:selected').text());" required>
+                        <select id="stuff" class="form-control" name="stuff" onchange="$('.stuff').text('Stuff Name: '+$('#stuff option:selected').text());">
                             <option value="" selected disabled>Select Available Stuff</option>
                         </select>
                     </div>
@@ -245,6 +249,10 @@
                     <hr/>
                     <button type="submit" name="booking" class="btn btn-success"><i class="fa fa-check-circle"></i> Confirm Booking</button>
                 </form>
+
         </div>
     </div>
 </div></div>
+</div></div>
+
+<script src="js/main.js"></script>

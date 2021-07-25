@@ -1,16 +1,16 @@
 <?php include './../layouts/session.php'; ?>
 <?php
 
-    if(isset($_SESSION["islogged"])){
+if(isset($_SESSION["islogged"])){
 
-        if($_SESSION['user']=='admin'){
-            header('location: ./../admin/dashboard.php');
-        }else if($_SESSION['user']=='customer'){
-            header('location: ./../customer/dashboard.php');
-        }
-    }else{
-        header('location: ./../login.php');
+    if($_SESSION['user']=='admin'){
+        header('location: ./../admin/dashboard.php');
+    }else if($_SESSION['user']=='customer'){
+        header('location: ./../customer/dashboard.php');
     }
+}else{
+    header('location: ./../login.php');
+}
 
 ?>
 
@@ -34,7 +34,6 @@ if(isset($_SESSION['error'])){
 
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 <?php include './../layouts/header.php'; ?>
@@ -46,13 +45,14 @@ if(isset($_SESSION['error'])){
     <div class="page-content">
         <div class="page-header">
             <div class="container-fluid">
-                <h2 class="h5 no-margin-bottom">Saloon Dashboard</h2>
+                <h2 class="h5 no-margin-bottom">Admin Dashboard</h2>
             </div>
         </div>
 
         <div style="margin:15px">
-            <button class="btn btn-secondary mar-5 add-service">Add Service</button>
+            <button class="btn btn-primary add-staff">Add Staff</button>
         </div>
+
 
         <!--        {{--Table--}}-->
 
@@ -60,20 +60,21 @@ if(isset($_SESSION['error'])){
             <div class="container-fluid">
                 <div class="row">
 
-                    <table id="_table" class="table table-bordered" style="width: 100%;">
-                        <thead><tr>
-                            <th>Category Name</th>
-                            <th>Service Name</th>
-                            <th>Price</th>
+                    <table id="ticket_table" class="table table-bordered" style="width: 100%;">
+                        <thead>
+                        <tr>
+                            <th>Staff Number</th>
+                            <th>Name</th>
+                            <th>E-mail</th>
                             <th>Action</th>
                         </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="students">
 
                         <?php
 
                         $init = $pdo->open();
-                        $sql = $init->prepare("SELECT *,service.id AS serID FROM service,category WHERE service.categoryID=category.id AND service.saloonID=:id");
+                        $sql = $init->prepare("SELECT * FROM staff,saloon WHERE staff.saloonID=saloon.id AND saloonID=:id");
                         $sql->execute(['id'=>$_SESSION['id']]);
 
                         if($sql->rowCount() > 0){
@@ -81,13 +82,13 @@ if(isset($_SESSION['error'])){
 
                                 echo '
                                      <tr>
-                                        <td>'.$data["categoryName"].'</td>
-                                        <td>'.$data["serviceName"].'</td>
-                                        <td>R'.$data["price"].'</td>
+                                        <td>'.$data["staffName"].'</td>
+                                        <td>'.$data["staffName"].'</td>
+                                        <td>'.$data["staffEmail"].'</td>
                                         <td>
                                             <div class="d-flex" >
-                                                <a id="'.$data["serID"].'" class="contributions bg-warning text-white action_spans edit-service" title="Edit"><i class="fa fa-edit"></i></a>
-                                                <a id="'.$data["serID"].'" class="contributions bg-danger text-white action_spans delete-service" title="Delete"><i class="fa fa-trash"></i></a>
+                                                <a id="'.$data["stuffID"].'" class="contributions bg-warning text-white action_spans edit-student" title="Edit"><i class="fa fa-edit"></i></a>
+                                                <a id="'.$data["stuffID"].'" class="contributions bg-danger text-white action_spans delete-student" title="Delete"><i class="fa fa-trash"></i></a>
                                             </div>
                                         </td>
                                      </tr>
@@ -99,6 +100,7 @@ if(isset($_SESSION['error'])){
                         ?>
 
                         </tbody>
+
                     </table>
 
                 </div>
@@ -111,6 +113,7 @@ if(isset($_SESSION['error'])){
 </div>
 
 <?php include('./../layouts/footer.php') ?>
+<script src="saloon.js"></script>
 </body>
 </html>
 

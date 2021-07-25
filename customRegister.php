@@ -95,6 +95,8 @@ if(isset($_POST['login'])){
                 $_SESSION['id'] = $results['id'];
                 $_SESSION["islogged"] = true;
                 $_SESSION["email"] = $results['email'];
+                $_SESSION["mobile"] = $results['mobile'];
+                $_SESSION["password"] = $results['password'];
                 header('location: admin/dashboard.php');
             }
             else{
@@ -114,6 +116,8 @@ if(isset($_POST['login'])){
                 $_SESSION['id'] = $results['id'];
                 $_SESSION["islogged"] = true;
                 $_SESSION["email"] = $results['email'];
+                $_SESSION["mobile"] = $results['mobile'];
+                $_SESSION["password"] = $results['password'];
                 header('location: customer/dashboard.php');
             }
             else{
@@ -133,6 +137,7 @@ if(isset($_POST['login'])){
                 $_SESSION['id'] = $results['id'];
                 $_SESSION["islogged"] = true;
                 $_SESSION["email"] = $results['email'];
+                $_SESSION["mobile"] = $results['mobile'];
                 header('location: saloon/dashboard.php');
             }
             else{
@@ -162,6 +167,14 @@ if (isset($_POST['getSaloon'])) {
     echo json_encode($results);
 }
 
+if (isset($_POST['searchSaloon'])) {
+
+    $sql = $conn->prepare("SELECT * FROM saloon WHERE id=:id");
+    $sql->execute(['id'=>$_POST['searchSaloon']]);
+    $results = $sql->fetch();
+
+    echo json_encode($results);
+}
 
 $pdo->close();
 ?>

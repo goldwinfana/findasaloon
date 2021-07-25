@@ -81,28 +81,25 @@ if(isset($_POST['add-book'])) {
     header('Location: '.$return);
 }
 
-if(isset($_POST['edit-book'])) {
-    $id = $_POST['edit-book'];
-    $book = $_POST['book'];
-    $author = $_POST['author'];
-    $category = $_POST['category'];
-    $shelve = $_POST['shelve'];
-    $price= $_POST['price'];
-    $quantity= $_POST['quantity'];
+if(isset($_POST['edit-customer'])) {
+    $id = $_POST['edit-customer'];
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $mobile = $_POST['mobile'];
+    $password = $_POST['password'];
 
-    $sql = $init->prepare("SELECT * FROM book WHERE bookName=:bookName ");
-    $sql->execute(['bookName' => $book]);
+    $sql = $init->prepare("SELECT * FROM customer WHERE id=:id ");
+    $sql->execute(['id' => $id]);
 
     if ($sql->rowCount() < 0) {
-        $_SESSION['error'] = 'Book does not exit';
+        $_SESSION['error'] = 'Customer does not exit';
     } else {
 
         try{
-            $sql = $init->prepare("UPDATE book SET bookName=:bookName, categoryID=:categoryID, quantity=:quantity,
-                                         author=:author,shelveNumber=:shelveNumber,price=:price
+            $sql = $init->prepare("UPDATE customer SET  name=:name,email=:email,mobile=:mobile,password=:password
                                          WHERE id=:id");
-            $sql->execute(['bookName'=>$book, 'categoryID'=>$category,'quantity'=>$quantity,'author'=>$author, 'shelveNumber'=>$shelve, 'price'=>$price,'id'=>$id]);
-            $_SESSION['success'] = 'Book updated successfully';
+            $sql->execute(['name'=>$name,'email'=>$email, 'mobile'=>$mobile, 'password'=>$password,'id'=>$id]);
+            $_SESSION['success'] = 'Details updated successfully';
         }catch (Exception $e){
             $_SESSION['error'] = $e->getMessage();
         }
@@ -123,6 +120,16 @@ if (isset($_POST['getSaloon'])) {
     echo json_encode($results);
 }
 
+if (isset($_POST['getSession'])) {
+    $user = $_SESSION['id'];
+
+    $sql = $init->prepare("SELECT * FROM session WHERE customerID=:id");
+    $sql->execute(['id' => $user]);
+    $results = $sql->fetchAll();
+
+    echo json_encode($results);
+}
+
 if (isset($_POST['getService'])) {
     $service = $_POST['getService'];
 
@@ -133,6 +140,23 @@ if (isset($_POST['getService'])) {
     $results = $sql->fetch();
 
     echo json_encode($results);
+}
+
+if (isset($_POST['test'])) {
+    $date = $_POST['test'];
+    $start = $_POST['start'];
+    $end= $_POST['end'];
+
+    try{
+        $sql = $init->prepare("SELECT * FROM session WHERE date=:date 
+                                        AND startTime BETWEEN :start AND :end ");
+        $sql->execute(['date' => $date,'start'=>$start,'end'=>$end]);
+        $results = $sql->fetch();
+    }catch (Exception $e){
+        $results = $e->getMessage();
+    }
+
+    echo json_encode($end+1);
 }
 
 if (isset($_POST['loadData'])) {
@@ -173,51 +197,6 @@ if (isset($_POST['getAllStuff'])) {
     echo json_encode($results);
 }
 
-if(isset($_POST['edit-student'])) {
-    $studNo = $_SESSION['studentNo'];
-    $name = $_POST['edit-name'];
-    $email = $_POST['edit-email'];
-    $id_number = $_POST['edit-idNo'];
-    $gender = $_POST['edit-gender'];
-    $password= $_POST['edit-password'];
-
-    $sql = $init->prepare("SELECT * FROM student WHERE studentNo=:studentNo ");
-    $sql->execute(['studentNo' => $_POST['studentNo']]);
-
-    if ($sql->rowCount() < 0) {
-        $_SESSION['error'] = 'Student does not exit';
-    } else {
-
-        try{
-            $sql = $init->prepare("UPDATE student SET name=:name, email=:email, id_number=:id_number,
-                                         gender=:gender,password=:password
-                                         WHERE studentNo=:studentNo");
-            $sql->execute(['name'=>$name,'email'=>$email,'id_number'=>$id_number, 'gender'=>$gender, 'password'=>$password,'studentNo'=>$studNo]);
-            $_SESSION['success'] = 'Student updated successfully';
-            $_SESSION['name'] = $name;
-        }catch (Exception $e){
-            $_SESSION['error'] = $e->getMessage();
-        }
-
-    }
-    header('Location: '.$return);
-}
-
-if(isset($_POST['delete-student'])){
-    $studentNo = $_POST['delete-student'];
-
-    try{
-        $sql = $init->prepare("DELETE FROM student WHERE studentNo=:studentNo");
-        $sql->execute(['studentNo'=>$studentNo]);
-
-        $_SESSION['success'] = 'Student deleted successfully';
-    }
-    catch(PDOException $e){
-        $_SESSION['error'] = $e->getMessage();
-    }
-    header('Location: '.$return);
-
-}
 
 if(isset($_POST['cancelBooking'])){
     $id = $_SESSION['id'];
@@ -241,7 +220,7 @@ if(isset($_POST['cancelBooking'])){
 if(isset($_POST['booking'])) {
 
     $user = $_SESSION['id'];
-    $stuff = $_POST['stuff'];
+//    $stuff = $_POST['stuff'];
     $saloon = $_POST['saloon'];
     $service = $_POST['service'];
     $startTime = $_POST['start'];
@@ -252,16 +231,49 @@ if(isset($_POST['booking'])) {
     $bookDate = date('Y M D H:i');
 
     try{
-        $sql = $init->prepare("INSERT INTO session (startTime, endTime,duration, customerID,stuffID, saloonID,price,service,date,bookDate)
-                    VALUES (:startTime, :endTime,:duration, :customerID,:stuffID, :saloonID,:price,:service,:date,:bookDate)");
+        $sql = $init->prepare("INSERT INTO session (startTime, endTime,duration, customerID,stuffID, saloonID,price,service,date,bookDate,status)
+                    VALUES (:startTime, :endTime,:duration, :customerID,:stuffID, :saloonID,:price,:service,:date,:bookDate,:status)");
         $sql->execute(['startTime'=>$startTime,'endTime'=>$endTime,'duration'=>$duration,'service'=>$service,'price'=>$price,
-            'customerID'=>$user,'stuffID'=>$stuff,'saloonID'=>$saloon, 'date'=>$date,'bookDate'=>$bookDate]);
+            'customerID'=>$user,'stuffID'=>'','saloonID'=>$saloon, 'date'=>$date,'bookDate'=>$bookDate,'status'=>'pending']);
 
         $_SESSION['success'] = 'Booking confirmed successfully at '.$bookDate;
     }catch (Exception $e){
         $_SESSION['error'] = $e->getMessage();
     }
 
+    header('Location: '.$return);
+}
+
+if(isset($_POST['complete'])){
+    $session = $_POST['complete'];
+
+    try{
+
+        $sql = $init->prepare("UPDATE session SET status=:status WHERE id=:id");
+        $sql->execute(['id' => $session,'status'=>'complete']);
+
+    }
+    catch(PDOException $e){
+        echo json_encode($e->getMessage());
+    }
+    header('Location: '.$return);
+}
+
+if(isset($_POST['endBooking'])){
+    $session = $_POST['endBooking'];
+
+    try{
+
+        $sql = $init->prepare("UPDATE session SET status=:status WHERE id=:id");
+        $sql->execute(['id' => $session,'status'=>'cancelled']);
+
+        $_SESSION['success'] = 'Session cancelled successfully';
+
+
+    }
+    catch(PDOException $e){
+        echo json_encode($e->getMessage());
+    }
     header('Location: '.$return);
 }
 
@@ -285,38 +297,6 @@ if(isset($_POST['report'])){
         $results = $sql->fetch();
 
 
-        $mail = new PHPMailer;
-        $mail->isSMTP();
-        $mail->SMTPDebug = 2; // 0 = off (for production use) - 1 = client messages - 2 = client and server messages
-        $mail->Host = "smtp.gmail.com"; // use $mail->Host = gethostbyname('smtp.gmail.com'); // if your network does not support SMTP over IPv6
-        $mail->Port = 587; // TLS only
-        $mail->SMTPSecure = 'tls'; // ssl is deprecated
-        $mail->SMTPAuth = true;
-
-        $mail->Username   = "crimealertsystem21@gmail.com";
-        $mail->Password   = "1234@Abc";
-
-        $mail->IsHTML(true);
-        $mail->AddAddress("crimealertsystem21@gmail.com", "Admin");
-        $mail->SetFrom("crimealertsystem21@gmail.com", "Police Crime App Support");
-
-        $mail->Subject = 'New Alert';
-        $mail->msgHTML( "
-                <p>Hi Admin</p>
-                <p>".$results['first_name'].' '.$results['last_name']." has been reported, please check alerts on the app for more info...</p>
-                <p>Case Number: ".$case_num."</p><br>
-                <a href='https://policealertapp.000webhostapp.com/admin/alerts.php' style='color: orange'>View Alerts</a>
-             ");
-        $mail->AltBody = 'HTML messaging not supported'; // If html emails is not supported by the receiver, show this body
-// $mail->addAttachment('images/phpmailer_mini.png'); //Attach an image file
-        $mail->SMTPOptions = array(
-            'ssl' => array(
-                'verify_peer' => false,
-                'verify_peer_name' => false,
-                'allow_self_signed' => true
-            )
-        );
-        $mail->send();
 
     }
     catch(PDOException $e){
@@ -325,21 +305,22 @@ if(isset($_POST['report'])){
     $_SESSION['case_number'] = $case_num;
 }
 
-if(isset($_POST['upload-images'])){
+if(isset($_POST['upload-image'])){
 
     $user = $_SESSION['id'];
-    $image = basename( $_FILES['img']['name']);
+    $description = $_POST['description'];
+    $image = basename( $_FILES['photo']['name']);
     try{
-        $sql = $init->prepare("INSERT INTO search (customerID,:image) VALUES (:customerID, :image)");
-        $sql->execute(['customerID'=>$user,'image'=>$image]);
+        $sql = $init->prepare("INSERT INTO search (customerID,image,description) VALUES (:customerID, :image,:description)");
+        $sql->execute(['customerID'=>$user,'image'=>$image,'description'=>$description]);
 
-        if(!empty($_FILES['img']))
+        if(!empty($_FILES['photo']))
         {
             $path = "uploads/";
-            $path = $path . basename( $_FILES['img']['name']);
+            $path = $path . basename( $_FILES['photo']['name']);
 
-            if(move_uploaded_file($_FILES['img']['tmp_name'], $path)) {
-                echo "The file ".  basename( $_FILES['img']['name']).
+            if(move_uploaded_file($_FILES['photo']['tmp_name'], $path)) {
+                echo "The file ".  basename( $_FILES['photo']['name']).
                     " has been uploaded";
             } else{
                 echo "There was an error uploading the file, please try again!";
@@ -349,8 +330,7 @@ if(isset($_POST['upload-images'])){
     }catch(PDOException $e){
         $_SESSION['error'] = $e->getMessage();
     }
-
-
+    header('Location: '.$return);
 }
 
 

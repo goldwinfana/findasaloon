@@ -25,7 +25,34 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f4206a9c-f2a8-4a49-bd9e-366ca639bde1" name="Default Changelist" comment="" />
+    <list default="true" id="f4206a9c-f2a8-4a49-bd9e-366ca639bde1" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/assets/css/custom.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/assets/css/custom.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/assets/css/style.default.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/assets/css/style.default.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/assets/js/custom.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/assets/js/custom.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/assets/js/front.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/assets/js/front.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/assets/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/assets/js/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/customRegister.php" beforeDir="false" afterPath="$PROJECT_DIR$/customRegister.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/customer/bookings.php" beforeDir="false" afterPath="$PROJECT_DIR$/customer/bookings.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/customer/dashboard.php" beforeDir="false" afterPath="$PROJECT_DIR$/customer/dashboard.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/customer/maps.php" beforeDir="false" afterPath="$PROJECT_DIR$/customer/maps.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/customer/modal.php" beforeDir="false" afterPath="$PROJECT_DIR$/customer/modal.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/customer/sql.php" beforeDir="false" afterPath="$PROJECT_DIR$/customer/sql.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layouts/footer.php" beforeDir="false" afterPath="$PROJECT_DIR$/layouts/footer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layouts/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/layouts/header.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layouts/navbar.php" beforeDir="false" afterPath="$PROJECT_DIR$/layouts/navbar.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layouts/scripts.php" beforeDir="false" afterPath="$PROJECT_DIR$/layouts/scripts.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layouts/session.php" beforeDir="false" afterPath="$PROJECT_DIR$/layouts/session.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/maps/JS/maps.js" beforeDir="false" afterPath="$PROJECT_DIR$/maps/JS/maps.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/saloon/dashboard.php" beforeDir="false" afterPath="$PROJECT_DIR$/saloon/dashboard.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/saloon/modal.php" beforeDir="false" afterPath="$PROJECT_DIR$/saloon/modal.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/saloon/sql.php" beforeDir="false" afterPath="$PROJECT_DIR$/saloon/sql.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/saloon/users.php" beforeDir="false" afterPath="$PROJECT_DIR$/saloon/stuff.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/student/books.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/student/dashboard.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/student/modal.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/student/sql.php" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -59,7 +86,16 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../findAsaloon old" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/saloon" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\findasaloon\saloon" />
+      <recent name="C:\xampp\htdocs\findasaloon\assets\js" />
+      <recent name="C:\xampp\htdocs\findasaloon\customer\js" />
+      <recent name="C:\xampp\htdocs\findasaloon\customer" />
+      <recent name="C:\xampp\htdocs\findasaloon\maps\JS" />
+    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -70,7 +106,19 @@
       <option name="presentableId" value="Default" />
       <updated>1624970736752</updated>
       <workItem from="1624970741763" duration="2407000" />
-      <workItem from="1624973551463" duration="7811000" />
+      <workItem from="1624973551463" duration="11933000" />
+      <workItem from="1625004930719" duration="23000" />
+      <workItem from="1625154625787" duration="6989000" />
+      <workItem from="1625583652054" duration="3455000" />
+      <workItem from="1625591057421" duration="5761000" />
+      <workItem from="1625646774310" duration="4562000" />
+      <workItem from="1625689771642" duration="12067000" />
+      <workItem from="1625730114329" duration="596000" />
+      <workItem from="1625819202652" duration="6357000" />
+      <workItem from="1626109709666" duration="17254000" />
+      <workItem from="1626210629337" duration="9461000" />
+      <workItem from="1626519125588" duration="4163000" />
+      <workItem from="1626620408386" duration="592000" />
     </task>
     <servers />
   </component>
@@ -117,10 +165,14 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="93" y="93" width="1350" height="638" key="DiffContextDialog" timestamp="1624995223631">
+    <state x="532" y="214" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1626126999736">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="93" y="93" width="1350" height="638" key="DiffContextDialog/0.0.1536.824/-1920.0.1280.680@0.0.1536.824" timestamp="1624995223631" />
+    <state x="532" y="214" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.824/-1920.0.1280.680@0.0.1536.824" timestamp="1626126999736" />
+    <state x="93" y="93" width="1350" height="638" key="DiffContextDialog" timestamp="1624998091385">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="93" y="93" width="1350" height="638" key="DiffContextDialog/0.0.1536.824/-1920.0.1280.680@0.0.1536.824" timestamp="1624998091385" />
     <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1624973362183">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -141,5 +193,28 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="93" y="93" width="1350" height="638" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/0.0.1536.824/-1920.0.1280.680@0.0.1536.824" timestamp="1624975141945" />
+    <state x="93" y="93" width="1350" height="638" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1625654830320">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="93" y="93" width="1350" height="638" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1536.824/-1920.0.1280.680@0.0.1536.824" timestamp="1625654830320" />
+    <state x="478" y="116" width="579" height="592" key="find.popup" timestamp="1625585794894">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="478" y="116" width="579" height="592" key="find.popup/0.0.1536.824/-1920.0.1280.680@0.0.1536.824" timestamp="1625585794894" />
+    <state x="425" y="187" key="run.anything.popup" timestamp="1625655824132">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="425" y="187" key="run.anything.popup/0.0.1536.824/-1920.0.1280.680@0.0.1536.824" timestamp="1625655824132" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/../LibraryManagementSystem/student/sql.php</url>
+          <line>259</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

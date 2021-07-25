@@ -30,10 +30,10 @@ function validateMobile(trigger) {
 }
 
 
-function validateEmail() {
+function stuffEmail() {
 
         var count =0;
-        let email = $('#email').val();
+        let email = $('input[name=staff-email]').val();
         let dotpos = email.indexOf(".");
         let afterDot = email.substr(dotpos,email.length -1);
         var iChar = ".";
@@ -47,17 +47,17 @@ function validateEmail() {
         if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email))
         {
             if(count > 2 || count ==0){
-                $('#verifyEmail').css('color','#dc3545').html('<span>Invalid Email Provided <i class="fa fa-warning"></i></span>');
+                $('#staffEmail').css('color','#dc3545').html('<span>Invalid Email Provided <i class="fa fa-warning"></i></span>');
             }else{
                 if(afterDot=='.com' ||afterDot=='.co.za' ||afterDot=='.org.za' ||afterDot=='.org' ||afterDot=='.tv'){
-                    $('#verifyEmail').css('color','green').html('<span>Valid Email Provided <i class="fa fa-handshake-o"></i></span>');
+                    $('#staffEmail').css('color','green').html('<span>Valid Email Provided <i class="fa fa-handshake-o"></i></span>');
                 }else{
-                    $('#verifyEmail').css('color','#dc3545').html('<span>Invalid Email Provided <i class="fa fa-warning"></i></span>');
+                    $('#staffEmail').css('color','#dc3545').html('<span>Invalid Email Provided <i class="fa fa-warning"></i></span>');
                 }
             }
 
         }else{
-            $('#verifyEmail').css('color','#dc3545').html('<span>Invalid Email Provided <i class="fa fa-warning"></i></span>');
+            $('#stuffEmail').css('color','#dc3545').html('<span>Invalid Email Provided <i class="fa fa-warning"></i></span>');
         }
 }
 
@@ -126,23 +126,10 @@ function matchPassword(){
     }
 }
 
-function sendForm(){
+function subForm(){
 
-    if($('#verifyMatch').css('color') =='rgb(220, 53, 69)'){
-        $('input[name=passwordMatch]').focus();
-        return false;
-    }
-    if($('input[name=password]').val() !== $('input[name=passwordMatch]').val()){
-        $('#verifyMatch').css('color','#dc3545').html('<span>Password Dont Match <i class="fa fa-warning"></i></span>');
-        $('input[name=passwordMatch]').focus();
-        return false;
-    }
-    if($('#verifyEmail').css('color') =='rgb(220, 53, 69)'){
-        $('input[name=email]').focus();
-        return false;
-    }
-    if($('#verifyPass').css('color') =='rgb(220, 53, 69)'){
-        $('input[name=password]').focus();
+    if($('#stuffEmail').css('color') =='rgb(220, 53, 69)'){
+        $('input[name=staff-email]').focus();
         return false;
     }
     return true;
@@ -150,11 +137,11 @@ function sendForm(){
 }
 
 
-function tt(){
-
-}
 
 $(function () {
+    $('.add-staff').on('click', function () {
+        $('#add-staff').modal("show");
+    });
 
     $('.fa-eye').on('click', function () {
         $('#password').attr('type') =='password'? $('#password').attr('type', 'text'): $('#password').attr('type', 'password');

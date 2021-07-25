@@ -43,32 +43,38 @@ const map = L.map('map').setView([curLat,curLng], 14);
 L.marker([curLat,curLng], {icon: curIcon}).addTo(map).bindPopup('Your Current Location <i class="fa fa-location-arrow"></i>');
 
 
+var url = new URL(window.location.href).searchParams.get('saloon_id');
+
 $.ajax({
     type: 'POST',
     url: '../customRegister.php',
     data: {
-        getSaloon:5},
+        searchSaloon:url},
     dataType: 'json',
     success: function(response){
         if(response !=null){
 
-            $.each(response,function (key,data) {
-                var location = data.location;
-                var lat = location.substr(0,location.indexOf(','));
-                var lng = location.substr(location.indexOf(',')+1);
+            var location = response.location;
+            var lat = location.substr(0,location.indexOf(','));
+            var lng = location.substr(location.indexOf(',')+1);
 
-                var dist = distance(curLat,lat,curLng,lng);
+            var dist = distance(curLat,lat,curLng,lng);
 
-                if(dist < 2.5){
-                    L.marker([lat,lng]).addTo(map).bindPopup('<a href="#'+data.name+'" onclick="openSaloon('+data.id+')">'+data.name+'</a>('+dist+') k.m');
-                }
-            });
+            if(dist < 2.5){
+                L.marker([lat,lng]).addTo(map).bindPopup('<a href="#'+response.name+'" onclick="openSaloon('+response.id+')">'+response.name+'</a>('+dist+') k.m');
+            }
+
 
         }
 
     }
 });
 
+
+
+// function drawMap(){
+//     return
+// }
 
 function openSaloon(id){
     console.log(id);

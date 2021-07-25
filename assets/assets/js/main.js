@@ -719,6 +719,10 @@ $(function () {
 
     });
 
+    $('.view-profile').on('click', function () {
+        $('.view-profile').modal("show");
+    });
+
 });
 
 setTimeout(function () {
